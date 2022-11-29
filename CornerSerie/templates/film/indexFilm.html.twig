@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CornerSerie - Films {% endblock %}
+
+{% block body %}
+    <div id="main">
+        <div id="films">
+            <h2>Nos films </h2>
+            <ul class="film-list">
+                {% for film in films %}
+                    <li class="film-list">
+                        <a style="color: black; text-decoration: none" href={{ path('film', {'id' : film.id}) }}>
+                            {% if film.affiche %}
+                                <img alt="Affiche du film" src={{ asset(film.affiche) }}>
+                            {% endif %}
+                            <h3>{{ film.titre }}</h3>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

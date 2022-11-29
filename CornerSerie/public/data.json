@@ -1,0 +1,91 @@
+{
+    "user":{
+       "name":"Lawrence",
+       "surname":"Jennifer",
+       "emprunts_films":{
+          "en_cours":[
+             {
+                "film":{
+                    "id": 34,
+                    "titre": "Il était une fois le Bronx"
+                },
+                "date_debut": "2022-04-11 17:51:00",
+                "date_fin": "2022-05-11 17:51:00",
+                "actif": true,
+                "restituer": false
+             },
+
+             {
+                "film":{
+                    "id": 38,
+                    "titre": "Alice au pays des merveilles"
+                },
+                "date_debut": "2022-04-13 17:51:00",
+                "date_fin": "2022-05-13 17:51:00",
+                "actif": true,
+                "restituer": false
+             }
+          ],
+          "termines":[
+             {
+                "film":{
+                    "id": 39,
+                    "titre": "Les noces funèbres"
+                },
+                "date_debut": "2022-04-13 17:51:00",
+                "date_fin": "2022-05-13 17:51:00",
+                "actif": false,
+                "restituer": true
+             }
+          ]
+       },
+       "emprunts_series":{
+          "en_cours":[
+             {
+                "saison":{
+                    "id":68,
+                    "numero":1,
+                    "serie":{
+                        "id":14,
+                        "titre":"Soupçon de magie"
+                    }
+                },
+                "date_debut": "2022-04-15 20:34:00",
+                "date_fin": "2022-05-18 20:34:23",
+                "actif": true,
+                "restituer": false
+             },
+             {
+                "saison":{
+                    "id":61,
+                    "numero":2,
+                    "serie":{
+                        "id":13,
+                        "titre":"Desperate Housewives"
+                    }
+                },
+                "date_debut": "2022-04-15 21:34:00",
+                "date_fin": "2022-05-18 21:34:23",
+                "actif": true,
+                "restituer": false
+             }
+          ],
+          "termines":[
+             {
+                "saison":{
+                    "id":60,
+                    "numero":1,
+                    "serie":{
+                        "id":13,
+                        "titre":"Desperate Housewives"
+                    }
+                },
+                "date_debut": "2022-04-05 20:34:00",
+                "date_fin": "2022-05-05 20:34:23",
+                "actif": false,
+                "restituer": true
+             }
+          ]
+       }
+    }
+ }

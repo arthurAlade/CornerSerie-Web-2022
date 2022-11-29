@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CornerSerie - Serie{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+   <div id="main">
+    <div id="serie">
+        <h2>Nos séries</h2>
+        <ul class="film-list">
+            {% for serie in series %}
+                <li class="film-list">
+                    <a style="color: black; text-decoration: none" href={{ path('serie', {'id' : serie.id, 'saison' : 1}) }}>
+                    <img src='{{ asset(serie.saisons[0].affiche) }}'>
+                    <h3>{{ serie.titre }}</h3>
+                    </a>
+                </li>
+                <?php else:?>
+            {% endfor %}
+        </ul>
+    </div>
+   </div>
+{% endblock %}

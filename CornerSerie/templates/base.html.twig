@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        {% block stylesheets %}
+            <!-- Bootstrap CSS -->
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+            <link href={{asset('style.css')}} rel="stylesheet" type="text/css" />
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{ path('Homepage') }}">CornerSeries</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle " href="/?films" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Films
+                            </a>
+                            <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item " href={{ path('films') }}>Films</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                {% for categories in categoriesFilms %}
+                                <li><a class="dropdown-item" href="/films/{{ categories }}"> {{ categories }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="/?series" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Séries
+                            </a>
+                            <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item " href={{ path('series') }}>Séries</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                {% for categories in categoriesSeries %}
+                                    <li><a class="dropdown-item" href="/series/{{ categories }}"> {{ categories }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav  mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img  class="logoUtilisateur" src="{{ asset('images/logo_utilisateur.png')}}" style="max-height: 35px; max-width: 35px;">
+                            </a>
+                            <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item " href={{ path('app_register') }}>Créer un compte</a></li>
+                                <li><a class="dropdown-item" href={{ path('app_login') }}>Se connecter</a></li>
+                                {% if app.user %}
+                                    <li ><a class="dropdown-item" href={{ path('app_emprunt') }}>Emprunts</a></li>
+                                    <li ><a class="dropdown-item"  href={{ path('app_logout') }}>Se déconnecter</a></li>
+                                {% endif %}
+
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <body>
+        {% block body %}{% endblock %}
+    </body>
+
+    <footer>
+        <p style="align-self: center">
+            CornerSeries - 2021 Copyrights
+            <p>
+                <a class="nav-link " href={{ path('admin') }} >
+                    Admin
+                </a>
+            </p>
+        </p>
+
+    </footer>
+</html>
+<script >
+    {% if app.user %}
+        localStorage.setItem("user_id", {{app.user.id}});
+    {% endif %}
+</script>

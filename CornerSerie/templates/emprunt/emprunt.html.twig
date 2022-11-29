@@ -1,0 +1,125 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello EmpruntController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div id="main">
+    <h2>Mes emprunts</h2>
+    {% if filmsEmpruntsEnCours != null  or saisonsEmpruntsEnCours != null %}
+        <h3>Emprunts en cours :</h3>
+        {% if filmsEmpruntsEnCours != null %}
+            <h4>Films</h4>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Film</th>
+                    <th>Date début d'emprunt</th>
+                    <th>Date de fin d'emprunt</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for emprunt in filmsEmpruntsEnCours %}
+                    <tr>
+                        <td>{{ emprunt.film.titre }}</td>
+                        <td>{{ emprunt.dateDebut|format_date( 'full',locale='fr')  }}</td>
+                        <td>{{ emprunt.dateFin|format_date( 'full',locale='fr')  }}</td>
+                        <td>
+                            <form  enctype="multipart/form-data" method="post" action=/emprunt>
+                                <input type="text" name="rendre" value="1" hidden>
+                                <input type="text" name="film" value="<?=$emprunt->getId_utilisateur()?>_<?=$film->getId()?>_<?=$emprunt->getDate_debut()?>" hidden>
+                                <button type="submit" class="btn btn-primary">Rendre</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+        {% if saisonsEmpruntsEnCours != null %}
+            <h4>Séries</h4>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Série</th>
+                    <th>Saison</th>
+                    <th>Date début d'emprunt</th>
+                    <th>Date de fin d'emprunt</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for emprunt in saisonsEmpruntsEnCours %}
+                    <tr>
+                        <td>{{ emprunt.saison.serie.titre }}</td>
+                        <td>{{ emprunt.saison.numero }}</td>
+                        <td>{{ emprunt.dateDebut|format_date( 'full',locale='fr')  }}</td>
+                        <td>{{ emprunt.dateFin|format_date( 'full',locale='fr')  }}</td>
+                        <td><form  enctype="multipart/form-data" method="post" action="/?emprunts&traitementFilm">
+                                <input type="text" name="rendre" value="1" hidden>
+                                <input type="text" name="film" value="<?=$emprunt->getId_utilisateur()?>_<?=$film->getId()?>_<?=$emprunt->getDate_debut()?>" hidden>
+                                <button type="submit" class="btn btn-primary">Rendre</button>
+                            </form></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    {% endif %}
+    {% if filmsEmpruntsPasses != null or saisonsEmpruntsPasses != null %}
+        <h3>Emprunts passés :</h3>
+        {% if filmsEmpruntsPasses != null %}
+            <h4>Films</h4>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Film</th>
+                    <th>Date début d'emprunt</th>
+                    <th>Date de fin d'emprunt</th>
+                    <th>Restituer</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for emprunt in filmsEmpruntsPasses %}
+                    <tr>
+                        <td>{{ emprunt.film.titre }}</td>
+                        <td>{{ emprunt.dateDebut|format_date( 'full',locale='fr')  }}</td>
+                        <td>{{ emprunt.dateFin|format_date( 'full',locale='fr')  }}</td>
+                        <td>{{ emprunt.restituer ? 'Oui':'Non' }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+        {% if saisonsEmpruntsPasses != null %}
+            <h4>Saisons</h4>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Série</th>
+                    <th>Saison</th>
+                    <th>Date début d'emprunt</th>
+                    <th>Date de fin d'emprunt</th>
+                    <th>Restituer</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for emprunt in saisonsEmpruntsPasses %}
+                    <tr>
+                        <td>{{ emprunt.saison.serie.titre }}</td>
+                        <td>{{ emprunt.saison.numero }}</td>
+                        <td>{{ emprunt.dateDebut|format_date( 'full',locale='fr')  }}</td>
+                        <td>{{ emprunt.dateFin|format_date( 'full',locale='fr')  }}</td>
+                        <td>{{ emprunt.restituer ? 'Oui':'Non' }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+    {% endif %}
+</div>
+{% endblock %}

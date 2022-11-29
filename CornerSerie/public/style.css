@@ -1,0 +1,64 @@
+div#main{
+    clear: both;
+    background-color: #FDFEFE;
+    width: 1200px;
+    margin : 0 auto;
+    padding: 10px 5px;
+}
+/****************************/
+/*  home page    			*/
+/****************************/
+
+ul.film-list {
+    overflow:hidden;
+    list-style: none;
+}
+li.film-list{
+    list-style: none;
+    float : left;
+    position: relative;
+    width: 200px;
+    height: 375px;
+    margin: 10px;
+    padding: 5px 0;
+    border: 1px solid #BDC3C7;
+}
+a.film-list {
+    text-decoration: none;
+}
+
+li.film-list img{
+    display: block;
+    max-width: 250px;
+    max-height: 250px;
+    margin: 5% auto;
+}
+li.film-list h3 {
+    text-decoration: none;
+    text-align: center;
+    height: 40px;
+}
+/****************************/
+/*  vue_film    			*/
+/****************************/
+div#vue-film{
+    display: flex;
+    flex-direction: column;
+}
+div#film\+affiche{
+    padding: 5px 0;
+}
+div#film>h2,p{
+    margin: 5px 0;
+
+}
+
+div#vue-film img{
+    float: left;
+    max-width: 400px;
+    max-height: 400px;
+}
+div#synopsis {
+    display: block;
+    float: left;
+}
